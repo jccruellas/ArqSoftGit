@@ -78,11 +78,52 @@ public class TestKing extends TestCase{
         } 
     }
     
+    @Test
+    public void testKing03_OK() {
+        System.out.println("testKing03_OK");
+        Board b = new Board(true);
+        int f1 = 2;
+        int c1 = 2;
+        int f2 = 3;
+        int c2 = 3;
+        King instace = new King(PieceColor.WHITE);
+
+        try {
+            instace.isPathFree(f1, c1, f2, c2, b);
+            Assert.assertTrue(true);
+        } catch (Exception e) {
+            Assert.assertTrue(false);
+        }
+
+    }
+
+    @Test
+    public void testKing04_KO() {
+        System.out.println("testKing04_KO");
+        Board b = new Board(true);
+        int f1 = 1;
+        int c1 = 1;
+        int f2 = 2;
+        int c2 = 2;
+        King instace = new King(PieceColor.WHITE);
+
+        try {
+            instace.isPathFree(f1, c1, f2, c2, b);
+            Assert.assertTrue(false);
+        } catch (Exception e) {
+            Assert.assertTrue(true);
+        }
+
+    }
+    
     public static TestSuite suite(){
     
         TestSuite suite = new TestSuite();
         suite.addTest(new TestKing("testKing01_OK"));
         suite.addTest(new TestKing("testKing02_KO"));
+        suite.addTest(new TestKing("testKing03_OK"));
+        suite.addTest(new TestKing("testKing04_KO"));
+
         return suite;
     }
 }
