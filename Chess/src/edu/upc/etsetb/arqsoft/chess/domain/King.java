@@ -24,7 +24,9 @@ public class King extends Piece {
 
     @Override
     public void isPathFree(int f1, int c1, int f2, int c2, Board b) throws NoPathFreeException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (b.getPiece(f2, c2) != null) {
+            throw new NoPathFreeException();
+        }
     }
 }
 
