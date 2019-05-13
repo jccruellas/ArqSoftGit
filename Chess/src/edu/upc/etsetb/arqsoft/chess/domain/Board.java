@@ -55,5 +55,13 @@ public class Board {
         }
 
     }
+    
+    public Piece getPiece(int f, int c){
+        return squares[f][c].getPiece() ;
+    }
+    public void movePiece(int f1, int c1, int f2, int c2, Piece p){
+        squares[f1][c1].setPiece(null) ;
+        squares[f2][c2].setPiece(p); 
+    }
 
 }
