@@ -50,7 +50,13 @@ public class Rook extends Piece{
         for(int fi=f_start;fi<=f_end;++fi){
             for(int ci=c_start;ci<=c_end;++ci){
                 Piece piece = b.getPiece(fi, ci);
-                if(piece != null){
+                if (ci == c2 && fi == f2){
+                    if (piece != null && piece.color == this.color){
+                        String msg = String.format("No path free, there is a piece of your color in (%d,%d)", fi,ci);
+                        throw new NoPathFreeException(msg);
+                    }
+                }
+                else if (piece != null){
                     String msg = String.format("No path free, there is a piece in (%d,%d)", fi,ci);
                     throw new NoPathFreeException(msg);
                 }
