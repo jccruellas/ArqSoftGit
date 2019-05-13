@@ -5,26 +5,64 @@
  */
 package edu.upc.etsetb.arqsoft.chess.ui;
 
+import edu.upc.etsetb.arqsoft.chess.services.ProtocolManager;
 import edu.upc.etsetb.arqsoft.chess.ui.text.BoardTextUI;
+import java.util.Scanner;
+import java.util.Arrays;
 
 /**
  *
  * @author JuanCarlos
  */
 public class UserInterface {
-    
-    public static void main(String[] args){
+
+    private static ProtocolManager protocol;
+
+    public static void main(String[] args) {
         /*
         Este código debería ser sustituido por código que presente un menú 
         de opciones al usuario y gestione las interacciones con el mismo.
         Ahora se limita a generar un Tablero textual y presentarlo por consola.
-        */
+         */
+
+        BoardTextUI boardText = new BoardTextUI(true);
+        boolean end = false;
         
-        BoardTextUI boardText = new BoardTextUI(true) ;
-        boardText.redraw(); 
-        boardText.move(1, 0, 2, 0);
-        boardText.redraw();
-        boardText.move(3, 0, 4, 0);
-        boardText.redraw(); 
+        while (!end) {
+            System.out.println("Introducir coordenadas del movimiento (Ejemplo: M:2,1:3,1): ");
+            Scanner scanner = new Scanner(System.in);
+            String user_input = scanner.nextLine();
+            scanner.close();
+
+            //Vamos a obtener el movimiento y las casillas
+            String[] input = user_input.split(":");
+            String tipo = input[0];
+            String posiciones_inicio = input[1];
+            String posiciones_fin = input[2];
+
+            //Volvemos a parsear para obtener los valores f1,c1 y f2,c2
+            String[] inicio = posiciones_inicio.split(",");
+            int f1 = Integer.parseInt(inicio[0]);
+            int c1 = Integer.parseInt(inicio[1]);
+            String[] fin = posiciones_fin.split(",");
+            int f2 = Integer.parseInt(fin[0]);
+            int c2 = Integer.parseInt(fin[1]);
+
+            switch (tipo) {
+                case "M":
+                    protocol.move(f1, c1, f2, c2);
+                    break;
+                default:
+                    end=true;
+            }
+        }
+    }
+
+    public void printMessage(String str) {
+        System.out.print(str);
+    }
+
+    public void printlnMessage(String str) {
+        System.out.println(str);
     }
 }
