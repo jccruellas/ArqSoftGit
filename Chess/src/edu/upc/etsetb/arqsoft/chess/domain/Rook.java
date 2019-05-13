@@ -55,10 +55,12 @@ public class Rook extends Piece{
                         String msg = String.format("No path free, there is a piece of your color in (%d,%d)", fi,ci);
                         throw new NoPathFreeException(msg);
                     }
-                }
-                else if (piece != null){
-                    String msg = String.format("No path free, there is a piece in (%d,%d)", fi,ci);
-                    throw new NoPathFreeException(msg);
+                }       
+                else if(piece != null){
+                    if (!(ci == c1 && fi == f1)){
+                        String msg = String.format("No path free, there is a piece in (%d,%d)", fi,ci);
+                        throw new NoPathFreeException(msg);
+                    }
                 }
             }
         }
