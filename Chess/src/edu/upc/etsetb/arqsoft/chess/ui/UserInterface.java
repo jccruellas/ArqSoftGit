@@ -18,6 +18,10 @@ public class UserInterface {
 
     private static ProtocolManager protocol;
 
+    public UserInterface(){
+        this.protocol = new ProtocolManager(this);
+    }
+    
     public static void main(String[] args) {
         /*
         Este código debería ser sustituido por código que presente un menú 
@@ -25,14 +29,15 @@ public class UserInterface {
         Ahora se limita a generar un Tablero textual y presentarlo por consola.
          */
 
+        UserInterface ui = new UserInterface();
+        
         BoardTextUI boardText = new BoardTextUI(true);
         boolean end = false;
+        Scanner scanner = new Scanner(System.in);
         
         while (!end) {
             System.out.println("Introducir coordenadas del movimiento (Ejemplo: M:2,1:3,1): ");
-            Scanner scanner = new Scanner(System.in);
             String user_input = scanner.nextLine();
-            scanner.close();
 
             //Vamos a obtener el movimiento y las casillas
             String[] input = user_input.split(":");
@@ -50,12 +55,13 @@ public class UserInterface {
 
             switch (tipo) {
                 case "M":
-                    protocol.move(f1, c1, f2, c2);
+                    ui.getProtocolManager().move(f1, c1, f2, c2);
                     break;
                 default:
                     end=true;
             }
         }
+        scanner.close();
     }
 
     public void printMessage(String str) {
@@ -64,5 +70,9 @@ public class UserInterface {
 
     public void printlnMessage(String str) {
         System.out.println(str);
+    }
+    
+    public ProtocolManager getProtocolManager(){
+        return this.protocol;
     }
 }

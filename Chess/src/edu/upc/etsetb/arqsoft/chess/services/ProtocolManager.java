@@ -26,10 +26,6 @@ public class ProtocolManager {
     public void move(int f1, int c1, int f2, int c2){
         game.move(f1, c1, f2, c2);
     }
-    
-    /*public static void main(String[] args){
-        ProtocolManager p = new ProtocolManager(new UserInterface()) ;
-    }*/
 
     public void badMoveOriginEmpty(int f1, int c1) {
         userInterface.printMessage("Bad movement: origin "+f1+", "+c1+" is empty.");

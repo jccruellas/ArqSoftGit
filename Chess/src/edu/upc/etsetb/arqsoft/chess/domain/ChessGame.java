@@ -123,9 +123,9 @@ public class ChessGame {
             else
                 this.playingColor = PieceColor.BLACK;
         } catch (NoPieceMoveException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("No piece move: "+ex.getMessage());
         } catch (NoPathFreeException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("No path free: "+ex.getMessage());
         }
     }
     
