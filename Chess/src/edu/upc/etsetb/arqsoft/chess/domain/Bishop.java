@@ -25,7 +25,12 @@ public class Bishop extends Piece{
 
     @Override
     public void isPathFree(int f1, int c1, int f2, int c2, Board b) throws NoPathFreeException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i  = 0; i <= f2 ; i++ ){
+            if (b.getPiece(f1+i, c1+i) != null) {
+                throw new NoPathFreeException();
+            }
+        }
+
     }
     
 }

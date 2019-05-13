@@ -23,8 +23,48 @@ public class Rook extends Piece{
     }
 
     @Override
-    public void isPathFree(int f1, int c1, int f2, int c2, Board b) throws NoPathFreeException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void isPathFree(int f1, int c1, int f2, int c2, Board b) throws NoPathFreeException {   
+        int c_start = 0;
+        int c_end = 0;
+        int f_start = 0;
+        int f_end = 0;
+        
+        if(c1<c2){
+            c_start = c1;
+            c_end = c2;
+        }
+        else{
+            c_start = c2;
+            c_end = c1;
+        }
+        
+        if(f1<f2){
+            c_start = f1;
+            c_end = f2;
+        }
+        else{
+            c_start = f2;
+            c_end = f1;
+        }
+        
+        for(int fi=f_start;fi<=f_end;++fi){
+            for(int ci=c_start;ci<=c_end;++ci){
+                Piece piece = b.getPiece(fi, ci);
+                if (ci == c2 && fi == f2){
+                    if (piece != null && piece.color == this.color){
+                        String msg = String.format("No path free, there is a piece of your color in (%d,%d)", fi,ci);
+                        throw new NoPathFreeException(msg);
+                    }
+                }       
+                else if(piece != null){
+                    if (!(ci == c1 && fi == f1)){
+                        String msg = String.format("No path free, there is a piece in (%d,%d)", fi,ci);
+                        throw new NoPathFreeException(msg);
+                    }
+                }
+            }
+        }
+        return;
     }
 }
 
