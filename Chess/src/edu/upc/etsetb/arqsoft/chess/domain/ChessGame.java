@@ -118,6 +118,10 @@ public class ChessGame {
             piece.isPieceMovement(f1, c1, f2, c2);
             piece.isPathFree(f1, c1, f2, c2, board);
             this.board.movePiece(f1, c1, f2, c2, piece);
+            if(this.playingColor == PieceColor.BLACK)
+                this.playingColor = PieceColor.WHITE;
+            else
+                this.playingColor = PieceColor.BLACK;
         } catch (NoPieceMoveException ex) {
             System.out.println(ex.getMessage());
         } catch (NoPathFreeException ex) {
