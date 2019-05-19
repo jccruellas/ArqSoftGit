@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 public class UserInterface {
 
-    private static ProtocolManager protocol;
+    public static ProtocolManager protocol;
 
     public UserInterface(){
         this.protocol = new ProtocolManager(this);
@@ -30,7 +30,6 @@ public class UserInterface {
          */
 
         UserInterface ui = new UserInterface();
-        
         BoardTextUI boardText = new BoardTextUI(true);
         boolean end = false;
         Scanner scanner = new Scanner(System.in);
@@ -45,23 +44,30 @@ public class UserInterface {
             String posiciones_inicio = input[1];
             String posiciones_fin = input[2];
 
-            //Volvemos a parsear para obtener los valores f1,c1 y f2,c2
-            String[] inicio = posiciones_inicio.split(",");
-            int f1 = Integer.parseInt(inicio[0]);
-            int c1 = Integer.parseInt(inicio[1]);
-            String[] fin = posiciones_fin.split(",");
-            int f2 = Integer.parseInt(fin[0]);
-            int c2 = Integer.parseInt(fin[1]);
-
             switch (tipo) {
                 case "M":
-                    ui.getProtocolManager().move(f1, c1, f2, c2);
+                    manageMove(ui,posiciones_inicio,posiciones_fin);
                     break;
                 default:
                     end=true;
             }
         }
         scanner.close();
+    }
+    
+    public static void manageMove(UserInterface ui,String posiciones_inicio,String posiciones_fin) throws NumberFormatException {
+        //Volvemos a parsear para obtener los valores f1,c1 y f2,c2
+        try{
+            String[] inicio = posiciones_inicio.split(",");
+            int f1 = Integer.parseInt(inicio[0]);
+            int c1 = Integer.parseInt(inicio[1]);
+            String[] fin = posiciones_fin.split(",");
+            int f2 = Integer.parseInt(fin[0]);
+            int c2 = Integer.parseInt(fin[1]);
+            ui.getProtocolManager().move(f1, c1, f2, c2);
+        }catch(NumberFormatException ex){
+            System.out.println("Argumento del Comando Incorrecto.");
+        }
     }
 
     public void printMessage(String str) {
